@@ -262,8 +262,11 @@ class VisualizerPerspective(Visualizer):
                 antialiased=True,
                 linewidths=5,
             )
-            for c in pp2.collections:
-                c.set_linestyle("solid")
+            if hasattr(pp2, 'collections'):
+                for c in pp2.collections:
+                    c.set_linestyle("solid")
+            else:
+                print(f"pp2 is of type {type(pp2)}, does not have 'collections'")
         else:
             # only plot central contour
             pp = self.output.ax.contour(
